@@ -167,6 +167,24 @@ connect(
 			});
 		});
 		
+		/* 404 - Page not found. */
+		app.get('/*', function( req, res ){
+			console.log( '---- 404 request.' );
+			res.writeHead( 404 );
+			res.end(
+				ejs.render(
+					fs.readFileSync('./views/404.ejs', 'utf8'),
+					{
+						locals: {
+							title: '404 - Page not found.',
+							message: 'The page you want to access does not exist.',
+							info: INFO
+						}
+					}
+				)
+			);
+		});
+		
 	})
 
 ).listen( serverPort || 80 );
