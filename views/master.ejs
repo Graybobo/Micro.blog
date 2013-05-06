@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/stylesheets.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<!--[if lt IE 9]>
+		<script src="/lib/HTML5/html5.js"></script>
+		<![endif]-->
+		<title><%= title %></title>
+		<!-- KILLHAPPY. 2013-05-06 -->
+	</head>
+	
+	<body>
+	<div class="wrapper">
+    
+		<header>
+			<h1 class="Micro-blog"><a href="/" target="_top"><%= title %></a></h1>
+			<p>(function(){ ... })();</p>
+			<p class="view">
+				<span>--</span><a class="current" href="/" target="_top">首页</a>
+			</p>
+			<p class="view">
+				<span>--</span><a href="/login" target="_top">登录</a>
+			</p>
+			<p class="view">
+				<span>--</span><a href="/about" target="_top">关于我</a>
+			</p>            
+			<p class="view">
+				<span>--</span><a href="<%= info.author.github %>" target="_blank">Github.</a>
+			</p>          
+		</header>
+
+		<% if (essay) { %>
+		
+		<% essay.forEach(function( i ){ %>
+		
+		<section>
+			<h3 class="section-title"><%= i.title %></h3>            
+			<div class="article-content"><%= i.content %></div>
+			<small class="section-footer">
+				<span class="published">发布于 <%= i.published %></span>
+				<span class="author"><a href="/" target="_top" title="<%= i.author %>"><%= i.author %></a></span>
+			</small>
+		</section>
+		
+		<% }) %>
+		
+		<% } %>
+		
+		<% else { %>
+		
+		<section>            
+			<p style="padding-top:60px;">
+				<strong><font color="#0088DD">尚未发布文章...</font></strong>
+			</p>
+		</section>
+		
+		<% } %>
+		    
+		<footer>
+			<p><small>&copy; <%= info.year %>. <%= info.author.name %></small></p>
+		</footer>
+    
+	</div>
+	
+	<script type="text/javascript" src="/javascripts/scale.js"></script>    
+	</body>
+</html>

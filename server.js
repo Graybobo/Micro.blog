@@ -20,6 +20,24 @@ connect(
 	connect.session({secret: 'keyboard cat'}),
 	
 	connect.router(function( app ){
+
+		app.get('/', function( req, res ){
+			DB.collection('essay').findItems({}, function( err, results ){
+				res.writeHead( 200 );
+				res.end(
+					ejs.render(
+						fs.readFileSync('./views/master.ejs', 'utf8'),
+						{
+							locals: {
+								title: 'Micro blog.',
+								essay: results,
+								info: INFO
+							}
+						}
+					)
+				);
+			});
+		});
 		
 		/* login */
 		app.get('/login', function( req, res ){
