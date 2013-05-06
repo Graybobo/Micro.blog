@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/stylesheets.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<!--[if lt IE 9]>
+		<script src="/lib/HTML5/html5.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="/lib/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/javascripts/login.js"></script>
+		<title><%= title %></title>
+		<!-- KILLHAPPY. 2013-05-05 -->
+	</head>
+	
+	<body>
+	<div class="wrapper">
+	
+		<section class="k-page">
+			<h2><%= title %></h2>
+			<form id="_loginForm" action="/authenticate" method="post" target="_self">
+				<p id="_tipInfo" class="tip-info" style="width:140px; display:none;"></p>
+				<p><span class="s">用&nbsp;&nbsp;户：</span><input class="login-i" type="text" name="account" value="" /></p>
+				<p><span class="s">密&nbsp;&nbsp;码：</span><input class="login-i" type="password" name="password" value="" /></p>
+				<p>
+					<input class="login-btn" type="button" onclick="return LOGIN.signIn();" value="登录" />
+					<input class="login-btn" type="button" onclick="LOGIN.resetForm();" value="重置" />
+				</p>
+			</form>
+		</section>
+	
+		<footer>
+			<p><small>&copy; <%= info.year %>. <%= info.author.name %></small></p>
+		</footer>
+	
+	</div>
+	
+	<script type="text/javascript">
+	<!--
+	(function(){
+		window.onload = function(){
+		document.getElementsByTagName('input').item(0).focus();
+	}
+	})();
+	//-->
+	</script>    
+	<script type="text/javascript" src="/javascripts/scale.js"></script>    
+	</body>
+</html>

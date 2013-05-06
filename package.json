@@ -1,0 +1,10 @@
+{
+	"name": "Micro-blog",
+	"main": "./server.js",
+	"dependencies": {
+		"connect": "latest",
+		"mongoskin": "latest",
+		"ejs": "latest"
+	},
+	"version": "1.0.0"
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/stylesheets.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<!--[if lt IE 9]>
+		<script src="/lib/HTML5/html5.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="/lib/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/lib/jquery/jquery.form.js"></script>
+		<title><%= title %></title>
+		<!-- KILLHAPPY. 2013-05-05 -->
+	</head>
+
+	<body>
+	<div class="wrapper">
+    
+		<section class="k-page">
+			<h2><%= title %></h2>
+			<form id="_publishForm" action="/publish" method="post" target="_self">
+				<p id="_tipInfo" class="tip-info" style="width:140px; display:none;"></p>
+				<p>
+					<span class="t">文章标题：</span>
+					<input class="input-i" type="text" name="title" style="width:460px;" value="请填写文章标题" />
+				</p>
+				<p>
+					<span class="t">URL Address：</span>
+					<input class="input-i" type="text" name="url" style="width:460px; display:block;" value="请填写 Url Address" />
+					<small class="e">[ URL Address 为文章唯一标识，不能重复. ]</small>
+				</p>
+				<p>
+					<span class="t">文章内容：</span>
+					<textarea class="publish-content" name="content">文章内容.</textarea>
+				</p>
+				<p>
+					<input type="hidden" name="author" value="<%= info.author.name %>" />
+					<input id="submit" class="grau-btn" type="button" value="写好了 我要发布" />
+					<input id="reset" class="grau-btn" type="reset" value="重新填写" />
+				</p>
+			</form>
+		</section>
+    
+		<footer>
+			<p><small>&copy; <%= info.year %>. <%= info.author.name %></small></p>
+		</footer>
+    
+	</div>
+	
+	<script type="text/javascript" src="/javascripts/scale.js"></script>
+	<script type="text/javascript">
+	<!--
+	(function(){
+		var _tipInfo = $('#_tipInfo');
+		
+		$('#submit').click(function(){
+			var _t = $.trim( $('input[name="title"]').val() ),
+				_u = $.trim( $('input[name="url"]').val() ),
+				_c = $.trim( $('textarea[name="content"]').val() );
+		
+			if( _t == '' ){
+				_tipInfo.removeClass('tip-loading').html('请填写文章标题.').show();
+				$('input[name="title"]').focus();
+				return;
+			}
+			if( _u == '' ){
+				_tipInfo.removeClass('tip-loading').html('请填写 Url Address.').show();
+				$('input[name="url"]').focus();
+				return;
+			}
+			if( _c == '' ){
+				_tipInfo.removeClass('tip-loading').html('文章内容不能为空.').show();
+				$('textarea[name="content"]').focus();
+				return;
+			}
+	
+			$('#_publishForm').ajaxSubmit({
+				beforeSubmit: function(){
+					_tipInfo.addClass('tip-loading').html( '数据提交中...' ).show();
+					$('#submit').prop( 'disabled', true );				
+				},
+				success: function( callback ){
+					var c = $.parseJSON( callback );
+					if( c.code == 0 ){
+						if( c.msg != '' ){
+							_tipInfo.removeClass('tip-loading').html( c.msg ).show();
+						}else{
+							_tipInfo.removeClass('tip-loading').html( '发布失败.' ).show();
+						}
+					}
+					if( c.code == 1 ){
+						_tipInfo.removeClass('tip-loading').html( '发布成功.' ).show();
+					}
+					
+					$('#submit').prop( 'disabled', false );
+					setTimeout("_tipInfo.html('').hide();", 3000);
+				}
+			});
+		});
+	
+		$('#reset').click(function(){
+			_tipInfo.html('').hide();
+		});
+	})();
+	//-->
+	</script>    
+	</body>
+</html>
