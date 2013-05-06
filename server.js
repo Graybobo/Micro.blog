@@ -38,6 +38,22 @@ connect(
 				);
 			});
 		});
+
+		/* about */
+		app.get('/about', function( req, res ){
+			res.writeHead( 200 );
+			res.end(
+				ejs.render(
+					fs.readFileSync('./views/about.ejs', 'utf8'),
+					{
+						locals: {
+							title: '关于我.',
+							info: INFO
+						}
+					}
+				)
+			);
+		});
 		
 		/* login */
 		app.get('/login', function( req, res ){
