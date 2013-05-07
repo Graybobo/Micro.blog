@@ -16,6 +16,8 @@ connect(
 
 	connect.favicon(__dirname + '/assets/favicon.ico'),
 	connect.static(__dirname + '/assets'),
+	connect.staticCache(),
+	connect.compress(),
 	connect.cookieParser(),
 	connect.session({secret: 'keyboard cat'}),
 	
