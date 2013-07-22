@@ -91,7 +91,7 @@ connect(
 				}
 				else {
 					console.log( '---- login failed.' );
-					res.setHeader( 'Location', req.url );
+					res.setHeader( 'Location', '/login#l_failed' );
 				}
 				res.writeHead( 302 );
 				res.end();
@@ -172,6 +172,7 @@ connect(
 		/* 404 - Page not found. */
 		app.get('/*', function( req, res ){
 			console.log( '---- 404 request.' );
+			console.log( '---- req.url: ' + req.url );
 			res.writeHead( 404 );
 			res.end(
 				ejs.render(

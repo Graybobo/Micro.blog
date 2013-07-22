@@ -7,6 +7,14 @@ var LOGIN = window.LOGIN || {};
 
 LOGIN = {
 	
+	init: function(){
+		var l = window.location.href;
+		if( l.indexOf( '#l_failed' ) != -1 ){
+			$('#_tipInfo').html('用户名或密码错误！').show();
+		}
+		$('input[name="account"]').focus();
+	},
+	
 	examine: function(){
 		var _u = $.trim( $('input[name="account"]').val() );
 		var _p = $.trim( $('input[name="password"]').val() );
@@ -51,3 +59,5 @@ LOGIN = {
 	}
 
 };
+
+$(function(){ LOGIN.init(); });
